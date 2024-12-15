@@ -1,0 +1,24 @@
+{
+  "name": "kafka-redis-feeder",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "ts-node src/consumer.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "kafka-node": "^5.0.0",
+    "redis": "^4.7.0"
+  },
+  "devDependencies": {
+    "@types/kafka-node": "^2.0.9",
+    "@types/node": "^22.9.0",
+    "@types/redis": "^4.0.10",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.6.3"
+  }
+}
