@@ -2,7 +2,6 @@ import { KafkaClient, Consumer } from 'kafka-node';
 import { createClient } from 'redis';
 
 // Kafka setup
-const mygittest = 1;
 const client = new KafkaClient({ kafkaHost: 'localhost:9092' });
 const consumer = new Consumer(
   client,
