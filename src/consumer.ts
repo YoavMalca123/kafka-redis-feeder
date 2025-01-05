@@ -2,7 +2,7 @@ import { KafkaClient, Consumer } from 'kafka-node';
 import { createClient } from 'redis';
 
 // Kafka setup
-const client = new KafkaClient({ kafkaHost: 'localhost:9092' });
+const client = new KafkaClient({ kafkaHost: 'localhost:9092' }); //connect to port 9092 (kafka's port)
 const consumer = new Consumer(
   client,
   [
@@ -12,11 +12,10 @@ const consumer = new Consumer(
   { autoCommit: true }
 );
 
-// Redis setup
+//redis setup
 const redisClient = createClient({ url: 'redis://localhost:6379' });
-redisClient.on('error', (err) => console.error('Redis error:', err));
+redisClient.on('error', (err) => console.error('Redis error:', err)); //check for errors while connecting to redis
 
-// Ensure Redis client is connected
 async function start() {
   try {
     await redisClient.connect();
@@ -24,11 +23,10 @@ async function start() {
 
     consumer.on('message', async (message) => {
       const topic = message.topic;
-      const key = `${topic}:${message.offset}`;
+      const key = `${topic}:${message.offset}`;  //save and give each message their own key
 
       try {
-        // Save each message under a unique key in Redis
-        await redisClient.set(key, message.value || '');
+        await redisClient.set(key, message.value || ''); 
         console.log(`Message from ${topic} stored with key ${key}`);
       } catch (error) {
         console.error(`Error storing message: ${error}`);
